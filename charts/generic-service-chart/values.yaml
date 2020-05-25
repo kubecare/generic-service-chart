@@ -25,7 +25,7 @@ readinessProbe:
   path: /
 
 imagePullSecrets: []
-name: "" # required
+name: ""
 fullnameOverride: ""
 
 service:
