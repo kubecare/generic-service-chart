@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "generic-service-chart.fullname" . }}
+  labels:
+{{ include "generic-service-chart.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    {{- if .Values.app.diagnosticsPort }}
+    - port: {{ .Values.app.diagnosticsPort }}
+      targetPort: diagnostics
+      protocol: TCP
+      name: diagnostics
+    {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ include "generic-service-chart.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

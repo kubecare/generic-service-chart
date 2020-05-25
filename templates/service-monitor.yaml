@@ -1,0 +1,24 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "generic-service-chart.fullname" . }}
+  labels:
+{{ include "generic-service-chart.labels" . | indent 4 }}
+{{ .Values.serviceMonitor.labels | toYaml | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "generic-service-chart.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  endpoints:
+  - path: {{ .Values.serviceMonitor.path }}
+{{- if .Values.diagnosticsPort }}
+    port: diagnostics
+{{- else }}
+    port: http
+{{- end }}
+{{- end }}

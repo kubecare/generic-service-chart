@@ -1,0 +1,4 @@
+name: webservice
+
+ingress:
+  hostname: example.kubecare.com
