@@ -76,3 +76,6 @@ volumes: []
 volumeMounts: []
 
 initContainers: []
+
+args: []
+command: []
