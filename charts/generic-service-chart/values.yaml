@@ -70,3 +70,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+volumes: []
+volumeMounts: []
+
+initContainers: []

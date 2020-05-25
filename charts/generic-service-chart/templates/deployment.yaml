@@ -21,6 +21,14 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+    {{- if .Values.volumes }}
+      volumes:
+      {{ toYaml .Values.volumes | nindent 8 }}
+    {{- end }}
+    {{- if .Values.initContainers }}
+      initContainers:
+      {{ toYaml .Values.initContainers | nindent 8 }}
+    {{- end }}
       containers:
         - name: app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -65,6 +73,10 @@ spec:
           {{- if .Values.resources }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml .Values.volumeMounts | nindent 12 -}}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
