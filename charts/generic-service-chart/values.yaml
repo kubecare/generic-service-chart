@@ -16,11 +16,15 @@ app:
   containerPort: 80
   diagnosticsPort: 8080
 
+hostNetwork: false
+
 livenessProbe:
+  enabled: true
   port: auto
   path: /
 
 readinessProbe:
+  enabled: true
   port: auto
   path: /
 
@@ -47,7 +51,7 @@ ingress:
     kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
-      paths: []
+      paths: ["/"]
 
   tls: []
   #  - secretName: chart-example-tls
@@ -76,6 +80,7 @@ volumes: []
 volumeMounts: []
 
 initContainers: []
+sidecarContainers: []
 
 args: []
 command: []

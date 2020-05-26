@@ -17,6 +17,9 @@ spec:
         app.kubernetes.io/name: {{ include "generic-service-chart.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+    {{- if .Values.hostNetwork }}
+      hostNetwork: true
+    {{- end }}
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -30,6 +33,9 @@ spec:
       {{ toYaml .Values.initContainers | nindent 8 }}
     {{- end }}
       containers:
+      {{- if .Values.sidecarContainers }}
+        {{- toYaml .Values.sidecarContainers | nindent 10 }}
+      {{- end }}
         - name: app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -46,6 +52,7 @@ spec:
           env:
             {{ toYaml .Values.env | nindent 10 }}
           {{- end }}
+          {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.livenessProbe.path }}
@@ -58,6 +65,8 @@ spec:
               {{- else }}
               port: {{ .Values.livenessProbe.port }}
               {{- end }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
               path: {{ .Values.readinessProbe.path }}
@@ -70,6 +79,7 @@ spec:
               {{- else }}
               port: {{ .Values.readinessProbe.port }}
               {{- end }}
+          {{- end }}
           {{- if .Values.command }}
           command:
           {{- toYaml .Values.command | nindent 12 }}

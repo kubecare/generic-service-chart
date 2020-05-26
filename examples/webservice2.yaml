@@ -1,0 +1,17 @@
+app:
+  diagnosticsPort: false
+
+serviceMonitor:
+  enabled: false
+
+ingress:
+  annotations: []
+  hosts:
+  - paths:
+    - /
+
+livenessProbe:
+  enabled: false
+
+readinessProbe:
+  enabled: false
