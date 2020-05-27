@@ -71,16 +71,14 @@ resources: {}
   #   memory: 128Mi
 
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
 
 volumes: []
 volumeMounts: []
-
 initContainers: []
 sidecarContainers: []
-
 args: []
 command: []
+securityContext: {}
+podAnnotations: {}
