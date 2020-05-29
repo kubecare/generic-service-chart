@@ -84,3 +84,9 @@ securityContext: {}
 podAnnotations: {}
 
 additionalObjects: {}
+
+migrationJob:
+  enabled: false
+  restartPolicy: Never
+  backoffLimit: 0
+  # the rest as for main container

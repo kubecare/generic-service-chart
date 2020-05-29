@@ -1,0 +1,64 @@
+{{- if .Values.migrationJob.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "generic-service-chart.fullname" . }}-migration
+  labels:
+{{ include "generic-service-chart.labels" . | indent 4 }}
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: {{ .Values.migrationJob.backoffLimit }}
+  template:
+    metadata:
+    {{- with .Values.migrationJob.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 10 }}
+    {{- end }}
+    spec:
+      restartPolicy: {{ .Values.migrationJob.restartPolicy }}
+      {{- if .Values.migrationJob.hostNetwork }}
+        hostNetwork: true
+      {{- end }}
+      {{- with .Values.migrationJob.imagePullSecrets }}
+        imagePullSecrets:
+        {{- toYaml . | nindent 10 }}
+      {{- end }}
+      containers:
+      - name: migration
+        image: "{{ .Values.migrationJob.image.repository }}:{{ .Values.migrationJob.image.tag }}"
+        imagePullPolicy: {{ .Values.migrationJob.image.pullPolicy }}
+        {{- if .Values.migrationJob.env }}
+        env:
+          {{- toYaml .Values.migrationJob.env | nindent 10 }}
+        {{- end }}
+        {{- if .Values.migrationJob.securityContext }}
+        securityContext:
+          {{- toYaml .Values.migrationJob.securityContext | nindent 12 }}
+        {{- end }}
+        {{- if .Values.migrationJob.command }}
+        command:
+        {{- toYaml .Values.migrationJob.command | nindent 12 }}
+        {{- end }}
+        {{- if .Values.migrationJob.args }}
+        args:
+        {{- toYaml .Values.migrationJob.args | nindent 12 }}
+        {{- end }}
+        {{- if .Values.migrationJob.resources }}
+        resources:
+          {{- toYaml .Values.migrationJob.resources | nindent 12 }}
+        {{- end }}
+      {{- with .Values.migrationJob.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.migrationJob.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.migrationJob.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{- end }}
