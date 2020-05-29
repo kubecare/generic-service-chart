@@ -82,3 +82,5 @@ args: []
 command: []
 securityContext: {}
 podAnnotations: {}
+
+additionalObjects: []
