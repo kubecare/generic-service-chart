@@ -52,9 +52,13 @@ spec:
             containerPort: {{ .Values.app.diagnosticsPort }}
             protocol: TCP
           {{- end }}
-          {{- if .Values.env }}
+          {{- if or .Values.env .Values.envDict}}
           env:
-            {{ toYaml .Values.env | nindent 10 }}
+          {{- range $k, $v := .Values.envDict }}
+          - name: {{ $k }}
+            value: {{ $v }}
+          {{- end }}
+          {{- toYaml .Values.env | nindent 10 }}
           {{- end }}
           {{- if .Values.securityContext }}
           securityContext:

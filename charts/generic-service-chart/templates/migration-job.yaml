@@ -29,9 +29,13 @@ spec:
       - name: migration
         image: "{{ .Values.migrationJob.image.repository }}:{{ .Values.migrationJob.image.tag }}"
         imagePullPolicy: {{ .Values.migrationJob.image.pullPolicy }}
-        {{- if .Values.migrationJob.env }}
+        {{- if or .Values.env .Values.migrationJob.envDict}}
         env:
-          {{- toYaml .Values.migrationJob.env | nindent 10 }}
+          {{- range $k, $v := .Values.migrationJob.envDict }}
+          - name: {{ $k }}
+            value: {{ $v }}
+          {{- end }}
+          {{ toYaml .Values.migrationJob.env | nindent 10 }}
         {{- end }}
         {{- if .Values.migrationJob.securityContext }}
         securityContext:
