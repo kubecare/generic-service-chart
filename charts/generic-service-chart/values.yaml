@@ -11,6 +11,7 @@ image:
   pullPolicy: IfNotPresent
 
 env: []
+envDict: {}
 
 app:
   containerPort: 80
@@ -89,4 +90,5 @@ migrationJob:
   enabled: false
   restartPolicy: Never
   backoffLimit: 0
+  envDict: {}
   # the rest as for main container
