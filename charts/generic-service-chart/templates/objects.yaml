@@ -1,4 +1,5 @@
-{{- range .Values.additionalObjects }}
-{{ toYaml . }}
+{{- range $k, $v := .Values.additionalObjects }}
+# {{ $k }}
+{{ toYaml $v }}
 ---
 {{- end }}

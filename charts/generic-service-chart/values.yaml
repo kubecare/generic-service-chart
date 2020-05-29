@@ -83,4 +83,4 @@ command: []
 securityContext: {}
 podAnnotations: {}
 
-additionalObjects: []
+additionalObjects: {}
