@@ -44,9 +44,11 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
+          {{- if .Values.app.containerPort }}
           - name: http
             containerPort: {{ .Values.app.containerPort }}
             protocol: TCP
+          {{- end }}
           {{- if .Values.app.diagnosticsPort }}
           - name: diagnostics
             containerPort: {{ .Values.app.diagnosticsPort }}
