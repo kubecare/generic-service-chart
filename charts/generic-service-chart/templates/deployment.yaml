@@ -21,6 +21,9 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
     spec:
+    {{- if .Values.rbac.create }}
+      serviceAccountName: {{ include "generic-service-chart.fullname" . }}
+    {{- end }}
     {{- if .Values.hostNetwork }}
       hostNetwork: true
     {{- end }}

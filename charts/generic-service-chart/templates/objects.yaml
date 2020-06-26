@@ -1,5 +1,5 @@
 {{- range $k, $v := .Values.additionalObjects }}
 # {{ $k }}
-{{ toYaml $v }}
+{{ toYaml $v | replace "$NAMESPACE" .Release.Namespace | replace "$FULLNAME" (include "generic-service-chart.fullname" .)}}
 ---
 {{- end }}

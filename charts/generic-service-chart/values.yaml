@@ -33,6 +33,9 @@ imagePullSecrets: []
 name: ""
 fullnameOverride: ""
 
+rbac:
+  create: true
+
 service:
   type: ClusterIP
   port: 80
