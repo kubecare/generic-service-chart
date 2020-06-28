@@ -37,6 +37,7 @@ rbac:
   create: true
 
 service:
+  enabled: true
   type: ClusterIP
   port: 80
 
