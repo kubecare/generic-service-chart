@@ -60,8 +60,8 @@ spec:
           {{- if or .Values.env .Values.envDict}}
           env:
           {{- range $k, $v := .Values.envDict }}
-          - name: {{ $k }}
-            value: {{ $v }}
+          - name: {{ $k | quote }}
+            value: {{ $v | quote }}
           {{- end }}
           {{- toYaml .Values.env | nindent 10 }}
           {{- end }}
