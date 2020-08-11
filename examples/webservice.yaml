@@ -2,3 +2,13 @@ name: webservice
 
 ingress:
   hostname: example.kubecare.com
+
+livenessProbe:
+  enabled: true
+  additionalSettings:
+    timeoutSeconds: 8
+
+readinessProbe:
+  enabled: true
+  additionalSettings:
+    timeoutSeconds: 8

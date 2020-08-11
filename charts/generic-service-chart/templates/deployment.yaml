@@ -82,6 +82,7 @@ spec:
               {{- else }}
               port: {{ .Values.livenessProbe.port }}
               {{- end }}
+              {{- toYaml .Values.livenessProbe.additionalSettings | nindent 14 }}
           {{- end }}
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
@@ -96,6 +97,7 @@ spec:
               {{- else }}
               port: {{ .Values.readinessProbe.port }}
               {{- end }}
+              {{- toYaml .Values.readinessProbe.additionalSettings | nindent 14 }}
           {{- end }}
           {{- if .Values.command }}
           command:
