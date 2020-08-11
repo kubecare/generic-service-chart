@@ -23,11 +23,13 @@ livenessProbe:
   enabled: true
   port: auto
   path: /
+  additionalSettings:
 
 readinessProbe:
   enabled: true
   port: auto
   path: /
+  additionalSettings:
 
 imagePullSecrets: []
 name: ""
