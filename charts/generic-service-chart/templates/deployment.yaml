@@ -83,7 +83,7 @@ spec:
               port: {{ .Values.livenessProbe.port }}
               {{- end }}
               {{- if .Values.livenessProbe.additionalSettings }}
-              {{- toYaml .Values.livenessProbe.additionalSettings | nindent 14 }}
+              {{- toYaml .Values.livenessProbe.additionalSettings | nindent 12 }}
               {{- end }}
           {{- end }}
           {{- if .Values.readinessProbe.enabled }}
@@ -100,7 +100,7 @@ spec:
               port: {{ .Values.readinessProbe.port }}
               {{- end }}
               {{- if .Values.readinessProbe.additionalSettings }}
-              {{- toYaml .Values.readinessProbe.additionalSettings | nindent 14 }}
+              {{- toYaml .Values.readinessProbe.additionalSettings | nindent 12 }}
               {{- end }}
           {{- end }}
           {{- if .Values.command }}
