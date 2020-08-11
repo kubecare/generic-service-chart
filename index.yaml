@@ -3,6 +3,15 @@ entries:
   generic-service-chart:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2020-08-11T13:22:32.405453245Z"
+    description: A Helm chart for Kubernetes
+    digest: 4fc5ce917484a81df3b88dcf02a8194f26992fca4b2c9a9eb7fc08b9a65edb60
+    name: generic-service-chart
+    urls:
+    - https://github.com/kubecare/generic-service-chart/releases/download/generic-service-chart-0.1.18/generic-service-chart-0.1.18.tgz
+    version: 0.1.18
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2020-08-11T12:50:06.390335833Z"
     description: A Helm chart for Kubernetes
     digest: 2df2d18bf640f7a3c6d55f9d7ccced209902b2dcc702be4151ba0c58330209a7
