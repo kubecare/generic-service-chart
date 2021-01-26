@@ -5,6 +5,8 @@
 replicaCount: 1
 revisionHistoryLimit: 2
 
+deploymentAdditionalSettings: {}
+
 image:
   repository: nginx
   tag: stable
