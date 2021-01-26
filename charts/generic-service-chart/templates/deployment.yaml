@@ -6,7 +6,7 @@ metadata:
 {{ include "generic-service-chart.labels" . | indent 4 }}
 spec:
   {{- if .Values.deploymentAdditionalSettings }}
-  {{- toYaml .Values.deploymentAdditionalSettings | nindent  }}
+  {{- toYaml .Values.deploymentAdditionalSettings | nindent 2 }}
   {{- end }}
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
